@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ninja Money</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body>
+    <!-- <div class="container">
+        <h2>Current Gold: {{request.session.gold}}</h2>
+        <div class="row">
+            <form action="/process_money" method="post">
+                {% csrf_token %}
+                <div class="col-md-3">
+                    <div class="well">
+                        <h4 class="text-default">
+                            <input type="hidden" name="building" value="farm">
+                            <button type="submit">Find Gold!</button>
+                            (earns 10-20 gold)
+                        </h4>
+                    </div>   
+                </div>
+            </form>
+        </div>
+    </div> -->
+
+    <!-- <form action="/process_money" method="post">
+        {% csrf_token %}
+        <h2>Farm</h2>
+        <h3>(earns 10-20 golds)</h3>
+        <input type="hidden" name="place" value="cave">
+        <button type="submit">Find Gold!</button>
+    </form>
+
+    <form action="/process_money" method="post">
+        {% csrf_token %}
+        <h2>Farm</h2>
+        <h3>(earns 10-20 golds)</h3>
+        <input type="hidden" name="place" value="house">
+        <button type="submit">Find Gold!</button>
+    </form>
+
+    <form action="/process_money" method="post">
+        {% csrf_token %}
+        <h2>Farm</h2>
+        <h3>(earns 10-20 golds)</h3>
+        <input type="hidden" name="place" value="casino">
+        <button type="submit">Find Gold!</button>
+    </form> -->
+
+    <div class="container">
+        <h4>Your Gold: {{request.session.total_gold}}</h4>
+        <div class="row">
+          <form action="/process_money" method="POST">
+            {% csrf_token %}
+            <div class="col-md-3">
+              <div class="well">
+                <h4 class="text-default">
+                  <input type="hidden" name="building" value="farm" />
+                  <input type="submit" class="btn btn-success pull-right" value="Find Gold!">
+                  Farm 10 - 20 GOLD
+                </h4>
+              </div>
+            </div>
+          </form>
+          <form action="/process_money" method="POST">
+            {% csrf_token %}
+            <div class="col-md-3">
+              <div class="well">
+                <h4 class="text-default">
+                  <input type="hidden" name="building" value="cave" />
+                  <input type="submit" class="btn btn-success pull-right" value="Find Gold!">
+                  Cave 5 - 10 GOLD
+                </h4>
+              </div>
+            </div>
+          </form>
+          <form action="/process_money" method="POST">
+            {% csrf_token %}
+            <div class="col-md-3">
+              <div class="well">
+                <h4 class="text-default">
+                  <input type="hidden" name="building" value="house" />
+                  <input type="submit" class="btn btn-success pull-right" value="Find Gold!">
+                  House 2 - 5 GOLD
+                </h4>
+              </div>
+            </div>
+          </form>
+          <form action="/process_money" method="POST">
+            {% csrf_token %}
+            <div class="col-md-3">
+              <div class="well">
+                <h4 class="text-default">
+                  <input type="hidden" name="building" value="casino" />
+                  <input type="submit" class="btn btn-success pull-right" value="Find Gold!">
+                  Casino Earn/Lose 0 - 50 GOLD
+                </h4>
+              </div>
+            </div>
+          </form>
+        </div>
+        <form action="/reset" method="POST">
+          {% csrf_token %}
+          <input type="submit" class="btn btn-primary pull-right" value="Play Again">
+        </form>
+        <div class="row">
+          <h3>Activities:</h3>
+          <div class="col-lg-12" style="height: 400px; overflow: scroll">
+            {% for log in request.session.activities reversed %}
+              {% if "lost" in log %}
+                <h4 class="text-danger">{{ log }}</h4>
+              {% else %}
+                <h4 class="text-success">{{ log }}</h4>
+              {% endif %}
+            {% endfor %}
+        </div>
+        </div>
+      </div>
+</body>
+</html>

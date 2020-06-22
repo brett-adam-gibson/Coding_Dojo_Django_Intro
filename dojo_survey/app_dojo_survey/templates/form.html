@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dojo Survey</title>
+</head>
+<body>
+    <h1> {{ message }}</h1>
+    <h1>Please fill out the form!</h1>
+    <form action="/process" method="POST">
+        {% csrf_token %}
+        Name: <input type="text" name="name">
+        Languages: <select name="language">
+            <option value="python">python</option>
+            <option value="c#">c#</option>
+            <option value="java">java</option>
+            <option value="javascript">javascript</option>
+            <option value="c">c</option>
+        </select>
+        Locations: <select name="location">
+            <option value="burbank">burbank</option>
+            <option value="chicago">chicago</option>
+            <option value="dallas">dallas</option>
+            <option value="seattle">seattle</option>
+            <option value="dc">dc</option>
+        </select>
+        <input type="submit" value="View User">
+        <br>
+        <br>
+        <br>
+        <a href="/random">Click to get to the random word generator:</a>
+    </form>
+</body>
+</html>
