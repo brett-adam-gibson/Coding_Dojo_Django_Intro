@@ -60,3 +60,5 @@ def reset(request):
         request.session['total_gold'] = 0
         request.session['activities'] = []
     return redirect('/')
+
+    
