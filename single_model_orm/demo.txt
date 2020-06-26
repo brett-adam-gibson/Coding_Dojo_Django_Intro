@@ -1,0 +1,131 @@
+style.css
+
+#home {
+    display: flex;
+    justify-content: space-between;
+}
+#home > * {
+    width: 50%;
+    margin: 0 3em;
+}
+body > h1 {
+    text-align: center;
+}
+
+
+=================================
+
+models.py
+from django.db import models
+
+# Create your models here.
+class User(models.Model):
+    first_name = models.CharField(max_length=45)
+    last_name = models.CharField(max_length=45)
+    email = models.EmailField(unique=True)
+    age = models.IntegerField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    # NOTE: @property allows the method to be called without parens
+    # eg: some_user.full_name
+    @property
+    def full_name(self):
+        return f"{self.first_name} {self.last_name}"
+
+====================================
+
+index.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <title>Users App</title>
+</head>
+<body>
+    <h1>All the Users</h1>
+    <div id="home">
+        <form action="/create" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="first_name">First Name</label>
+                <input type="text" id="first_name" name="first_name" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="last_name">Last Name</label>
+                <input type="text" id="last_name" name="last_name" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="age">Age</label>
+                <input type="number" name="age" id="age" class="form-control">
+            </div>
+            <button class="btn btn-primary">Submit</button>
+        </form>
+        <table class="table table-dark">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Age</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.full_name }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.age }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
+
+
+====================================
+
+app/urls.py
+
+from django.urls import path
+from . import views
+urlpatterns = [
+    path('', views.index),
+    path('create', views.create)
+]
+
+=====================================
+
+app/views.py
+
+from django.shortcuts import render, redirect
+from .models import User
+# Create your views here.
+def index(request):
+    context = {
+        'users': User.objects.all()
+    }
+    return render(request, 'index.html', context)
+
+def create(request):
+    User.objects.create(
+        first_name=request.POST['first_name'],
+        last_name=request.POST['last_name'],
+        email=request.POST['email'],
+        age=request.POST['age']
+    )
+    return redirect('/')
+
+    

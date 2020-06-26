@@ -8,4 +8,4 @@ class User(models.Model):
     age = models.IntegerField()
     created_at = models.DateTimeField(auto_now=True)
     updated_at = models.DateTimeField(auto_now=True)
-    
+
