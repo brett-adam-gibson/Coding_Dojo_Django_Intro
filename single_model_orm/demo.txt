@@ -128,4 +128,3 @@ def create(request):
     )
     return redirect('/')
 
-    
