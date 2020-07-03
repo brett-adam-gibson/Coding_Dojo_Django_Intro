@@ -7,48 +7,6 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 </head>
 <body>
-    <!-- <div class="container">
-        <h2>Current Gold: {{request.session.gold}}</h2>
-        <div class="row">
-            <form action="/process_money" method="post">
-                {% csrf_token %}
-                <div class="col-md-3">
-                    <div class="well">
-                        <h4 class="text-default">
-                            <input type="hidden" name="building" value="farm">
-                            <button type="submit">Find Gold!</button>
-                            (earns 10-20 gold)
-                        </h4>
-                    </div>   
-                </div>
-            </form>
-        </div>
-    </div> -->
-
-    <!-- <form action="/process_money" method="post">
-        {% csrf_token %}
-        <h2>Farm</h2>
-        <h3>(earns 10-20 golds)</h3>
-        <input type="hidden" name="place" value="cave">
-        <button type="submit">Find Gold!</button>
-    </form>
-
-    <form action="/process_money" method="post">
-        {% csrf_token %}
-        <h2>Farm</h2>
-        <h3>(earns 10-20 golds)</h3>
-        <input type="hidden" name="place" value="house">
-        <button type="submit">Find Gold!</button>
-    </form>
-
-    <form action="/process_money" method="post">
-        {% csrf_token %}
-        <h2>Farm</h2>
-        <h3>(earns 10-20 golds)</h3>
-        <input type="hidden" name="place" value="casino">
-        <button type="submit">Find Gold!</button>
-    </form> -->
-
     <div class="container">
         <h4>Your Gold: {{request.session.total_gold}}</h4>
         <div class="row">

@@ -1,25 +1,4 @@
 
-# from django.shortcuts import render, redirect
-# def index(request):
-#     if 'gold' in request.session:
-#         return render(request, 'index.html')
-#     else:
-#         request.session['gold'] = 0
-#         return render(request, 'index.html')
-
-# def process_money(request):
-#     print(request.POST['place'])
-
-#     return redirect('/')
-
-
-# def reset(request):
-#     if request.method == 'POST':
-#         request.session['gold'] = 0
-#         request.session['activities'] = []
-#     return redirect('/')
-
-
 from django.shortcuts import render, redirect
 import random
 from datetime import datetime
@@ -61,4 +40,3 @@ def reset(request):
         request.session['activities'] = []
     return redirect('/')
 
-    

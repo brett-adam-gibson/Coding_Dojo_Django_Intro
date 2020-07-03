@@ -1,0 +1,11 @@
+.container {
+    background-color: darkgray;
+}
+
+.col-md-6 {
+    padding: 20px;
+}
+
+#text {
+    display: block;
+}

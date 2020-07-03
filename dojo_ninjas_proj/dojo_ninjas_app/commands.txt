@@ -1,0 +1,71 @@
+(djangoPy3Env) gibby@gibby:~/Desktop/CodingDojo/python_stack/django/django_intro/dojo_ninjas_proj$ python manage.py shell
+
+In [1]: from dojo_ninjas_app.models import Dojo, Ninja 
+
+
+Create 3 new dojos:
+In [2]: dojo1 = Dojo.objects.create(name = 'dojo 1', city = 'Simi Valley', state = 'CA')                                                                                                    
+
+In [3]: dojo2 = Dojo.objects.create(name = 'dojo 2', city = 'Kern', state = 'CA')                                                                                                           
+
+In [4]: dojo3 = Dojo.objects.create(name = 'dojo 3', city = 'San Diego', state = 'CA')   
+
+
+Delete the first 3 dojos:
+In [19]: dojo1.delete()                                                                                                                                                                     
+Out[19]: (1, {'dojo_ninjas_app.Ninja': 0, 'dojo_ninjas_app.Dojo': 1})
+In [21]: dojo2.delete()                                                                                                                                                                     
+Out[21]: (1, {'dojo_ninjas_app.Ninja': 0, 'dojo_ninjas_app.Dojo': 1})
+
+In [22]: dojo3.delete()                                                                                                                                                                     
+Out[22]: (1, {'dojo_ninjas_app.Ninja': 0, 'dojo_ninjas_app.Dojo': 1})
+
+
+Create 3 more dojo's:
+In [24]: dojo4 = Dojo.objects.create(name = 'dojo 4',city = 'Agoura',state = 'CA')                                                                                                          
+
+In [25]: dojo5 = Dojo.objects.create(name = 'dojo 5',city = 'Houston',state = 'TX')                                                                                                         
+
+In [26]: dojo6 = Dojo.objects.create(name = 'dojo 6',city = 'Haines',state = 'Ak')  
+
+
+Create 3 ninjas that belong to the first dojo:
+In [27]: ninja1 = Ninja.objects.create(first_name = 'Brett', last_name = 'Gibson',dojo = dojo4)                                                                                             
+
+In [28]: ninja2 = Ninja.objects.create(first_name = 'Lana', last_name = 'Gibson',dojo = dojo4)                                                                                              
+
+In [29]: ninja3 = Ninja.objects.create(first_name = 'Lelu', last_name = 'Gibson',dojo = dojo4)   
+
+
+Create 3 ninjas that belong to the second dojo:
+In [30]: ninja4 = Ninja.objects.create(first_name = 'Aniston', last_name = 'Gibson',dojo = dojo5)                                                                                           
+
+In [31]: ninja5 = Ninja.objects.create(first_name = 'Allie', last_name = 'Gibson',dojo = dojo5)                                                                                             
+
+In [32]: ninja6 = Ninja.objects.create(first_name = 'Steve', last_name = 'Gibson',dojo = dojo5)  
+
+
+Create 3 ninjas that belong to the third dojo:
+In [33]: ninja7 = Ninja.objects.create(first_name = 'Jan', last_name = 'Demaio',dojo = dojo6)                                                                                               
+
+In [34]: ninja8 = Ninja.objects.create(first_name = 'Randy', last_name = 'Demaio',dojo = dojo6)                                                                                             
+
+In [35]: ninja9 = Ninja.objects.create(first_name = 'Darius', last_name = 'Demaio',dojo = dojo6) 
+
+
+Retrieve all the ninjas from the first dojo:
+In [38]: dojo1_ninjas = Ninja.objects.filter(dojo=dojo4) 
+
+
+Retrieve all the ninjas from the last dojo:
+In [41]: dojo3_ninjas = Ninja.objects.filter(dojo=dojo6) 
+
+
+Retrieve the last ninja's dojo:
+In [44]: Ninja.objects.last().dojo                                                                                                                                                          
+Out[44]: <Dojo: Dojo object (6)>
+
+
+Create a new dojo:
+In [2]: dojo7 = Dojo.objects.create(name='dojo 7',city = 'Thousand Oaks',state='CA',desc='This is my home town')       
+
