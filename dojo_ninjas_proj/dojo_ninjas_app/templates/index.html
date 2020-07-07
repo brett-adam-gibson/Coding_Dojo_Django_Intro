@@ -63,10 +63,10 @@
         <div class="col-md-12 col-md-offset-5">
             <h2>All Dojo's & Ninjas</h2>
             {% for dojo in dojos %}
-                <h4>{{ dojo.name }}</h4>
+                <h4>{{ dojo.name }} ({{dojo.ninjas.all|length}})<a href="/delete_dojo/{{ dojo.id }}"> <button>Delete</button></a></h4>
                 {% for ninja in dojo.ninjas.all %}
                 <ul style="list-style-position: inside; vertical-align: middle;">
-                    <li>{{ ninja.first_name }} {{ninja.last_name}}</li>
+                    <li>{{ ninja.first_name }} {{ninja.last_name}} </li>
                 </ul>
                 {% endfor %}
             {% endfor %}

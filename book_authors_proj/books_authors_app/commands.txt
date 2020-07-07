@@ -1,0 +1,113 @@
+In [1]: from books_authors_app.models import *                                                                                                                                              
+
+
+Query: Change the name of the C Sharp book to C#:
+In [2]: C = Book.objects.get(title='C_Sharp')    
+
+In [6]: C.title                                                                                                                                                                             
+Out[6]: 'C_Sharp'
+
+In [7]: C.title='C#' 
+
+In [9]: C.save()  
+
+
+
+Query: Change the first name of the 4th author to Bill:
+In [11]: fourth_author = Author.objects.get(id=4)                                                                                                                                           
+
+In [12]: fourth_author.first_name                                                                                                                                                           
+Out[12]: 'William'
+
+In [13]: fourth_author.first_name='Bill'                                                                                                                                                    
+
+In [14]: fourth_author.first_name                                                                                                                                                           
+Out[14]: 'Bill'
+
+In [16]: fourth_author.save()
+
+
+
+Query: Assign the first author to the first 2 books:
+In [22]: author1 = Author.objects.get(id=1)                                                                                                                                                 
+
+In [23]: author1.books.add(book1)                                                                                                                                                           
+
+In [24]: author1.books.add(book2)  
+
+In [29]: author1.books.all()                                                                                                                                                                
+Out[29]: <QuerySet [<Book: Book object (1)>, <Book: Book object (2)>]>
+
+
+
+Query: Assign the second author to the first 3 books:
+In [30]: author2 = Author.objects.get(id=2)                                                                                                                                                 
+
+In [31]: book3 = Book.objects.get(id=3)                                                                                                                                                     
+
+In [32]: author2.books.add(book1, book2, book3)                                                                                                                                             
+
+In [33]: author2.books                                                                                                                                                                      
+Out[33]: <django.db.models.fields.related_descriptors.create_forward_many_to_many_manager.<locals>.ManyRelatedManager at 0x7f37d09f2c10>
+
+In [34]: author2.books.all()                                                                                                                                                                
+Out[34]: <QuerySet [<Book: Book object (1)>, <Book: Book object (2)>, <Book: Book object (3)>]>
+
+
+
+Query: Assign the third author to the first 4 books:
+In [35]: book4 = Book.objects.get(id=4)                                                                                                                                                     
+
+In [36]: author3 = Author.objects.get(id=3)                                                                                                                                                 
+
+In [37]: author3.books.add(book1,book2,book3,book4)                                                                                                                                         
+
+In [38]: author3.books.all()                                                                                                                                                                
+Out[38]: <QuerySet [<Book: Book object (1)>, <Book: Book object (2)>, <Book: Book object (3)>, <Book: Book object (4)>]>
+
+
+Query: Assign the fourth author to the first 5 books (or in other words, all the books):
+In [39]: book5 = Book.objects.get(id=5)                                                                                                                                                     
+
+In [40]: author4 = Author.objects.get(id=4)                                                                                                                                                 
+
+In [41]: author4.books.add(book1,book2,book3,book4,book5)                                                                                                                                   
+
+In [42]: author4.books.all()                                                                                                                                                                
+Out[42]: <QuerySet [<Book: Book object (1)>, <Book: Book object (2)>, <Book: Book object (3)>, <Book: Book object (4)>, <Book: Book object (5)>]>
+
+
+Query: Retrieve all the authors for the 3rd book:
+In [44]: book3.authors.all()                                                                                                                                                                
+Out[44]: <QuerySet [<Author: Author object (2)>, <Author: Author object (3)>, <Author: Author object (4)>]>
+
+
+Query: Remove the first author of the 3rd book:
+In [52]: book3.authors.all()                                                                                                                                                                
+Out[52]: <QuerySet [<Author: Author object (2)>, <Author: Author object (3)>, <Author: Author object (4)>]>
+
+In [53]: book3.authors.remove(author2)                                                                                                                                                      
+
+In [54]: book3.authors.all()                                                                                                                                                                
+Out[54]: <QuerySet [<Author: Author object (3)>, <Author: Author object (4)>]>
+
+
+Query: Add the 5th author as one of the authors of the 2nd book:
+In [61]: author5 = Author.objects.get(id=5)                                                                                                                                                 
+
+In [62]: author5.books.add(book2)    
+
+In [64]: book2.authors.all()                                                                                                                                                                
+Out[64]: <QuerySet [<Author: Author object (1)>, <Author: Author object (2)>, <Author: Author object (3)>, <Author: Author object (4)>, <Author: Author object (5)>]>
+
+
+Query: Find all the books that the 3rd author is part of:
+In [65]: author3.books.all()                                                                                                                                                                
+Out[65]: <QuerySet [<Book: Book object (1)>, <Book: Book object (2)>, <Book: Book object (3)>, <Book: Book object (4)>]>
+
+
+Query: Find all the authors that contributed to the 5th book:
+In [66]: book5.authors.all()                                                                                                                                                                
+Out[66]: <QuerySet [<Author: Author object (4)>]>
+
+

@@ -10,7 +10,13 @@ class Dojo(models.Model):
     created_at = models.DateTimeField(auto_now=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    #ninjas is a querryset 
+    def __repr__(self):
+        return f" Dojo name: {self.name} id:{self.id}>"
+
+    def __str__(self):
+        return self.name
+
+    #ninjas is a querryset
 class Ninja(models.Model):
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)

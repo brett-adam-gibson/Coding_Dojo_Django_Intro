@@ -1,4 +1,4 @@
-"""dojo_ninjas_proj URL Configuration
+"""book_authors_proj URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/2.2/topics/http/urls/
@@ -13,13 +13,9 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-
+from django.contrib import admin
 from django.urls import path
-from . import views
 
 urlpatterns = [
-    path('', views.index),
-    path('add_dojo', views.add_dojo),
-    path('add_ninja', views.add_ninja),
-    path('delete_dojo/<int:dojo_id>', views.delete_dojo),
+    path('admin/', admin.site.urls),
 ]
