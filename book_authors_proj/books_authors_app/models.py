@@ -15,4 +15,8 @@ class Author(models.Model):
     books = models.ManyToManyField(Book, related_name='authors')
     notes = models.TextField(null=True)
 
+    @property
+    def full_name(self):
+        return f"{self.first_name} {self.last_name}"
+
 

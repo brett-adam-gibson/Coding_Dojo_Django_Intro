@@ -1,3 +1,5 @@
 {
-    "python.pythonPath": "/home/gibby/Desktop/CodingDojo/python_stack/my_enviroments/djangoPy3Env/bin/python3"
+    "python.pythonPath": "/home/gibby/Desktop/CodingDojo/python_stack/my_enviroments/djangoPy3Env/bin/python3",
+    "python.linting.pylintEnabled": true,
+    "python.linting.enabled": true
 }

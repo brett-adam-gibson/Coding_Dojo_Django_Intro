@@ -1,0 +1,35 @@
+body {
+    background-color: rgb(21, 73, 170);
+}
+
+h1,h2,h3,h4,h5,p,label {
+    color: blanchedalmond;
+}
+
+nav {
+    background-color: #79778d;
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 1em;
+    padding: 1em;
+}
+
+nav > h1 {
+    text-shadow: 2px 2px 2px black;
+}
+
+nav > a {
+    font-size: 2rem;
+    text-shadow: 2px 2px 2px white;
+}
+
+section.split-screen {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+section.split-screen > * {
+    width: 50%;
+    margin: 2em;
+}
+

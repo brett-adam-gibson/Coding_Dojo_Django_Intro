@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css'%}">
+    <title>Books & Authors - Book Details</title>
+</head>
+<body>
+    <nav>
+        <h1>Books & Authors</h1>
+        <a href="/">Books</a>
+        <a href="/authors">Authors</a>
+    </nav>
+    <div class="container">
+        <h1>{{ book.title }}</h1>
+        <p><strong>ID</strong> {{ book.id }}</p>
+        <p><strong>Description</strong> {{ book.description }}</p>
+        <p><strong>Authors</strong></p>
+        <ul>
+            {% for author in book.authors.all %}
+            <li>{{ author.full_name }}</li>
+            {% endfor %}
+        </ul>
+        {% if authors %}
+        <form action="/books/{{ book.id }}/assign" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="author_id"> Add Author</label>
+                <select name="author_id" id="author_id" class="form-control">
+                    {% for author in authors %}
+                    <option value="{{ author.id }}">{{ author.full_name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button class="btn btn-primary">Add</button>
+        </form>
+        {% endif %}
+    </div>
+</body>
+</html>
