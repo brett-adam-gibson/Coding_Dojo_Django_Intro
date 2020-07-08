@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Show</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"> 
+</head>
+<body>
+    <nav class="navbar navbar-default">
+        <h4><a href="/">Go Back</a></h4>
+    </nav>
+    <div class="container">
+        <h1>Add a New Show</h1>
+        <hr>
+        <section>
+            <form action="/shows/create" method="POST">
+                {% csrf_token%}
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" name="title" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="network">Network</label>
+                    <input type="text" name="network" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="release_date">Release Date</label>
+                    <input type="date" name="release_date" id="release_date" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea name="description" id="description" class="form-control"></textarea>
+                </div>
+                <button class="btn btn-primary">Create</button>
+            </form>
+        </section>
+    </div>
+</body>
+</html>

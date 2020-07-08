@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Shows</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"> 
+</head>
+<body>
+    <nav class="navbar navbar-default">
+        <h4><a href="/">Go Back</a></h4>
+    </nav>
+    <h1>All Shows</h1>
+    <table class="table table-dark">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Network</th>
+                <th>Release Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for show in shows %}
+            <tr>
+                <td>{{ show.id }}</td>
+                <td>{{ show.title }}</td>
+                <td>{{ show.network }}</td>
+                <td>{{ show.release_date|date:"SHORT_DATE_FORMAT" }}</td>
+                <td><a href="/shows/{{show.id}}">Show</a> | <a href="/shows/{{ show.id }}/edit">Edit</a> | <a href="/shows/{{ show.id }}/delete">Delete</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <hr>
+    <a href="/shows/new">Add a New Show</a>
+</body>
+</html>
