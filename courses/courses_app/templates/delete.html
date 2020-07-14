@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete {{ course.name }}</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <div class="col-md-12">
+            <p>Are you sure you want to delete this course?</p>
+            <table class="table table-borderless mb-4">
+                <tbody>
+                    <tr>
+                        <td>Name</td>
+                        <td>{{ course.name }}</td>
+                    </tr>
+                    <tr>
+                        <td>Description</td>
+                        <td>{{ course.description.description }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <form action="/{{ course.id }}/delete" method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger btn-sm">Yes, I want to delete this!</button>
+            <a href="/" role="button" class="btn btn-secondary btn-sm">No, go back.</a>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

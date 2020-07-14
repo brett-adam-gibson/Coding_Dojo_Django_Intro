@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ course.name }} Comments</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+</head>
+<body>
+    <div class="container">
+        <h1>Add a new comment</h1>
+        <form action="/{{ course.id }}/comments" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="comment">Description</label>
+                {% if messages %}
+                <ul class="alert-danger small w-50">
+                    {% for message in messages %}
+                    <li class="text-danger text-small">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                <textarea name="comment" id="comment" cols="10" rows="5" class="form-control"></textarea>
+            </div>
+            <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+            <a href="/" role="button" class="btn btn-secondary btn-sm">Go Back</a>
+        </form>
+    </div>
+    <div class="container">
+        <h1>All Comments</h1>
+        {% for comment in course.comments.all %}
+        <blockquote class="blockquote">
+            <p class="mb-0">{{ comment.comment }}</p>
+            <footer class="blockquote-footer">{{ comment.created_at|date:'M d, Y P'}}</footer>
+        </blockquote>
+        {% endfor %}
+    </div>
+</body>
+</html>

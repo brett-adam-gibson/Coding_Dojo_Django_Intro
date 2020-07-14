@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courses</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <div class="col-md-12">
+            <h1>Add a new course:</h1>
+            <ul>
+                {% for message in messages %}   
+                    <li>{{ message }}</li>
+                {% endfor %} 
+            </ul>
+            <form action="/create" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" name="name" id="name" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="description">Description:</label>
+                    <input type="text" name="description" id="description" class="form-control">
+                </div>
+                <button class="btn btn-primary">Add</button>
+            </form>
+            <br>
+            <br>
+        </div>
+    </div>
+    <div class="container">
+        <h1>All Courses:</h1>
+        <table class="table table-dark">
+            <thead>
+                <th>Course Name</th>
+                <th>Description</th>
+                <th>Date Added</th>
+                <th>Action</th>
+                <th>Course ID</th>
+            </thead>
+            <tbody>
+                {% for course in courses %}
+                    <tr>
+                        <td>{{ course.name }}</td>
+                        <td>{{ course.description.description }}</td>
+                        <td>{{ course.created_at }}</td>
+                        <td>
+                            <a href="/{{ course.id }}">Show Comments</a> | 
+                            <a href="/{{ course.id }}/delete">Delete</a>
+                        </td>
+                        <td>{{ course.id }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
