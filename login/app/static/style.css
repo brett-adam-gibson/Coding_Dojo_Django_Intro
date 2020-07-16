@@ -2,13 +2,23 @@ body {
     background-color: rgb(48, 53, 53);
 }
 
+/* h1 {
+    display: inline-block;
+} */
+
 h1,h2,h3,h4,h5,p,label,form {
     color: blanchedalmond;
 }
 
-.container {
+/* .container {
     /* padding-bottom: 60px; */
     display: inline-flex;
     padding-top: 30px;
     justify-content: center;
-}
+} */
+
+
+/* section {
+display: flex;
+justify-content: space-evenly;
+} */

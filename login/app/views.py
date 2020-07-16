@@ -15,7 +15,7 @@ def create(request):
     errors = User.objects.validate(request.POST)
     # are there errors?
     if errors:
-        for field, value in errors.items():
+        for value in errors.values():
             messages.error(request, value, extra_tags='register')
         return redirect('/')
 
