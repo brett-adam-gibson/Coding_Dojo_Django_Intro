@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Wall</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}"> 
+</head>
+<body>
+    <nav>
+        <h1>CodingDojo Wall</h1>
+        <h3>Welcome {{user.first_name}}</h3>
+        <a href="/">Log off</a>
+    </nav>
+    <hr>
+
+    <div class="container">
+        <div class="col-md-12">
+            <h2>Post a message:</h2>
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li {% if message.tags %} class="{{ message.tags}}" {% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            <form action="/posts/create_post" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" name="title" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="content"> Content</label>
+                    <textarea name="content" id="content" cols=70 rows="7" class="form-control"></textarea>
+                </div>
+                <button class="btn btn-primary">Post a mesage</button>
+            </form>
+        </div>
+        <div class="col-md-12">
+            <br>
+            <h2> All Messages:</h2>
+            {% for post in posts %}
+                <div class="posts">
+                    <h3>{{ post.title }}</h3>
+                    <blockquote>{{ post.content }}</blockquote>
+                    <p>{{ post.author.first_name }} on {{ post.created_at }}</p>
+                    <form action="/posts/add_comment/{{post.id}}" method="POST">
+                        {% csrf_token %}
+                        <label for="comment_content">Comment</label>
+                        <textarea name="comment_content" id="comment_content" cols="50" rows="3"></textarea>
+                        <button class="btn btn-info btn-sm">Add comment</button>
+                    </form>
+                    <br>
+                        {% for comment in post.post_comments.all %}
+                            <blockquote>{{ comment.comment_content }}</blockquote>
+                        {% endfor %}
+                    {% if post.author.id  == request.session.user_id %}
+                    <a class="btn btn-danger" href="/posts/{{ post.id }}/delete">Delete Post</a>
+                    {% endif %}
+                    <hr>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
