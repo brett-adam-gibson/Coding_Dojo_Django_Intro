@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}"> 
+    <title>Favorite Books App</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Please register or login</h1>
+        <hr>
+        <div class="wrapper">
+            <section>
+                <h2>Register</h2>
+                {% if messages %}
+                <ul class="messages">    
+                    {% for message in messages %}    
+                        {% if 'register' in message.extra_tags %}
+                        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                        {% endif %}    
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                <form action="/create_user" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="first_name">First Name</label>
+                        <input type="text" name="first_name" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="last_name">Last Name</label>
+                        <input type="text" name="last_name" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" name="email" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" name="password" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="conf_password">Confirm Password</label>
+                        <input type="password" name="conf_password" class="form-control">
+                    </div>
+                    <button class="btn btn-primary">Submit</button>
+                </form>
+            </section>
+            <hr>
+            <section>
+                <h2>Login</h2>
+                {% if messages %}
+                <ul class="messages">    
+                    {% for message in messages %}    
+                        {% if 'login' in message.extra_tags %}
+                        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                        {% endif %}    
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                <form action="/login" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" name="email" id="email" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" name="password" id="password" class="form-control">
+                    </div>
+                    <button class="btn btn-primary">Submit</button>
+            </section>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}"> 
+    <title>{{ book.title }}</title>
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">Favorite Books</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+                aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto"></ul>
+                <span class="navbar-text">
+                    Welcome, {{user.first_name}} <a href="/fav_books/logout" role="button" class="btn btn-sm btn-info ml-2 text-white">Logout</a>
+                    <a href="/fav_books" role="button" class="btn btn-sm btn-info ml-2 text-white">Back</a>
+                </span>
+            </div>
+        </div>
+    </nav><!-- /NAVBAR -->
+
+    <div class="container">
+        <div class="row">
+            <div class="col-6 px-2">
+                <h3>{{book.title}}</h3>
+                <p>Added by: {{book.uploaded_by.first_name}} {{book.uploaded_by.last_name}}</p>
+                <p>Added on: {{book.created_at}}</p>
+                <p>Last Updated on: {{book.updated_at}}</p>
+                {% if book.uploaded_by.id != request.session.user_id %}
+                <p>Description: {{book.description}}</p>
+                {% else %}
+                <form action="/fav_books/{{book.id}}/update" method="POST">
+                    {% csrf_token %}
+                    <label for="description">Description</label>
+                    <input name="description" class="form-control w-50" placeholder="{{book.description}}">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                    <a href="/fav_books/{{book.id}}/delete" role="button" class="btn btn-danger">Delete</a>
+                </form>
+                {% endif %}
+            </div>
+            <div class="col-6 px-2">
+                <h3>Users Who Favorited the Book</h3>
+                <ul>
+                    {% for fav in book.users_who_like.all %}
+                    <li>{{fav.first_name}} {{fav.last_name}}</li>
+                    {% endfor %}
+                </ul>
+                {% if user in book.users_who_like.all %}
+                <a href="/fav_books/unfavorite/{{book.id}}" role="button" class="btn btn-danger">Remove From Favorites</a>
+                {% else %}
+                <a href="/fav_books/favorite/{{book.id}}" role="button" class="btn btn-warning">Add to Favorites</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

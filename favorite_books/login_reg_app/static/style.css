@@ -1,0 +1,19 @@
+body {
+    background-color: rgb(48, 51, 53);
+}
+
+nav {
+    display: flex;
+    justify-content: space-around;
+    padding-top: 20px;
+}
+textarea {
+    display: flex;
+}
+h1,h2,h3,h4,h5,p,label,form {
+    color: blanchedalmond;
+}
+
+blockquote {
+    color: cadetblue;
+}
